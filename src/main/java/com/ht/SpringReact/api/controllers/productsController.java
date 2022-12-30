@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ht.SpringReact.business.abstracts.ProductService;
@@ -37,6 +38,28 @@ public class productsController {
 
 		return productService.add(product);
 
+	}
+
+	@GetMapping("/getByProductName")
+	public DataResult<Product> getByProductName(@RequestParam String productName) {
+		return productService.getByProductName(productName);
+
+	}
+
+	@GetMapping("/getByProductNameAndCategory")
+	public DataResult<Product> getByProductNameAndCategory(@RequestParam String productName,
+			@RequestParam int categoryId) {
+		return productService.getByProductNameAndCategory(productName, categoryId);
+	}
+
+	@GetMapping("/getByProductNameContains")
+	public DataResult<List<Product>> getByProductNameContains(@RequestParam String productName) {
+		return productService.getByProductNameContains(productName);
+	}
+
+	@GetMapping("/getAllByPage")
+	public DataResult<List<Product>> getAll(int pageNo, int pageSize) {
+		return productService.getAll(pageNo, pageSize);
 	}
 
 }
